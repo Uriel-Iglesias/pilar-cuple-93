@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+*.log
+.vscode/
+.idea/
+
+# screenshots for local QA
+screenshot-*.png
+
+# legacy next.js sandbox (not part of this project)
+lumen/
