@@ -11,7 +11,9 @@ screenshot-*.png
 .netlify/
 .pilar-respuestas.json
 asets/
+fotos cuadros/
 fotonueba*.jpeg
+fotonueba *.jpeg
 *.bak
 
 # proyecto Next.js antiguo, no forma parte

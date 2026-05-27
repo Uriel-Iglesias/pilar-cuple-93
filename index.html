@@ -558,6 +558,73 @@
 
       /* respect reduced motion */
     }
+    /* === GALERÍA DE CUADROS === */
+    .painting-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (min-width: 640px)  { .painting-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    @media (min-width: 1024px) { .painting-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+    .painting-item {
+      position: relative; border: 0; padding: 0; cursor: pointer;
+      background: #fdfbf6; overflow: hidden;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px -12px rgba(58,47,37,.35);
+      transition: transform .25s ease, box-shadow .25s ease;
+      -webkit-tap-highlight-color: rgba(183,136,74,.2);
+    }
+    .painting-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px -12px rgba(58,47,37,.45);
+      z-index: 2;
+    }
+    .painting-item img {
+      display: block; width: 100%; height: 100%;
+      aspect-ratio: 1 / 1; object-fit: cover;
+    }
+
+    /* === LIGHTBOX === */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(20,16,12,.94);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 99;
+      padding: 1rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox img {
+      max-width: 92vw; max-height: 86vh;
+      object-fit: contain;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
+      border-radius: 4px;
+    }
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+      position: absolute;
+      background: rgba(255,255,255,.1);
+      border: 0; color: #fff;
+      cursor: pointer;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      transition: background .2s ease;
+    }
+    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,.2); }
+    .lightbox-close { top: 16px; right: 18px; }
+    .lightbox-prev  { top: 50%; left: 14px;  transform: translateY(-50%); }
+    .lightbox-next  { top: 50%; right: 14px; transform: translateY(-50%); }
+    .lightbox-counter {
+      position: absolute; bottom: 16px; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.7);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1rem;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
@@ -575,13 +642,14 @@
   <header class="sticky top-0 z-40 bg-cream/75 nav-blur border-b border-mocha/10">
     <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#inicio" class="font-serif text-2xl tracking-wide text-ink">
-        <span class="italic">Pilar</span> <span class="text-gold">·</span> 93
+        <span class="italic">Pilar</span> <span class="text-gold">·</span> 92
       </a>
       <ul class="hidden md:flex items-center gap-7 text-sm text-mocha">
         <li><a class="hover:text-ink transition" href="#carta">La carta</a></li>
         <li><a class="hover:text-ink transition" href="#vida">Mi vida</a></li>
         <li><a class="hover:text-ink transition" href="#lecciones">Lo que aprendí</a></li>
         <li><a class="hover:text-ink transition" href="#recetas">Mi receta</a></li>
+        <li><a class="hover:text-ink transition" href="#cuadros">Mis cuadros</a></li>
         <li><a class="hover:text-ink transition" href="#sobres">Para cada uno</a></li>
         <li><a class="hover:text-ink transition" href="#album">Mi álbum</a></li>
       </ul>
@@ -595,7 +663,7 @@
   <section id="inicio" class="relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-6 pt-16 pb-20 md:pt-20 md:pb-24 grid md:grid-cols-12 gap-10 items-center">
       <div class="md:col-span-7 order-2 md:order-1">
-        <p class="ornament text-xs text-gold mb-6">Zaragoza · 28 · 05 · 2026 · 93 años</p>
+        <p class="ornament text-xs text-gold mb-6">Zaragoza · 28 · 05 · 2026 · 92 años</p>
         <h1 class="font-serif text-5xl md:text-7xl leading-[1.02] text-ink">
           Mis queridos<br/>
           <span class="italic text-gold">nietos,</span>
@@ -625,7 +693,7 @@
                 src="img/pilar/pilar-hero.jpg" />
             </div>
             <p class="absolute bottom-4 left-0 right-0 text-center font-note text-2xl text-mocha">
-              Yo, en mis 93
+              Yo, en mis 92
             </p>
           </div>
           <span class="stamp absolute -top-4 -left-4 bg-cream/95 shadow-soft">
@@ -665,7 +733,6 @@
           <li><span class="ornament text-[10px] text-gold mr-3">casada con</span>Ángel Campo, médico.</li>
           <li><span class="ornament text-[10px] text-gold mr-3">madre de</span>Ángel, Marta, Rafael y Pedro.</li>
           <li><span class="ornament text-[10px] text-gold mr-3">abuela de</span>Marc, Miquel, María, Clara, Pol y Jan.</li>
-          <li><span class="ornament text-[10px] text-gold mr-3">y de</span>seis bisnietos.</li>
         </ul>
       </div>
     </div>
@@ -785,9 +852,9 @@
       </div>
 
       <!-- mini stats -->
-      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+      <div class="mt-14 grid grid-cols-3 gap-4 max-w-xl mx-auto reveal">
         <div class="rounded-2xl bg-cream/70 border border-mocha/10 py-5 text-center">
-          <p class="font-serif text-4xl text-gold">93</p>
+          <p class="font-serif text-4xl text-gold">92</p>
           <p class="ornament text-[10px] text-mocha mt-1">años cumplidos</p>
         </div>
         <div class="rounded-2xl bg-cream/70 border border-mocha/10 py-5 text-center">
@@ -797,10 +864,6 @@
         <div class="rounded-2xl bg-cream/70 border border-mocha/10 py-5 text-center">
           <p class="font-serif text-4xl text-gold">6</p>
           <p class="ornament text-[10px] text-mocha mt-1">nietos</p>
-        </div>
-        <div class="rounded-2xl bg-cream/70 border border-mocha/10 py-5 text-center">
-          <p class="font-serif text-4xl text-gold">6</p>
-          <p class="ornament text-[10px] text-mocha mt-1">bisnietos</p>
         </div>
       </div>
     </div>
@@ -959,6 +1022,71 @@
           </div>
         </details>
       </div>
+    </div>
+  </section>
+
+
+  <!-- =========== CUADROS / PINTURAS =========== -->
+  <section id="cuadros" class="relative py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-10 md:mb-14 reveal">
+        <p class="ornament text-xs text-gold mb-4">Capítulo VI</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-ink">Mis cuadros</h2>
+        <p class="mt-4 text-mocha max-w-xl mx-auto italic">Lo que pinto cuando no os tengo cerca.</p>
+      </div>
+
+      <div class="painting-grid reveal">
+        <button class="painting-item" data-idx="0" aria-label="Cuadro 1"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-01.jpg" alt="Cuadro 1" /></button>
+        <button class="painting-item" data-idx="1" aria-label="Cuadro 2"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-02.jpg" alt="Cuadro 2" /></button>
+        <button class="painting-item" data-idx="2" aria-label="Cuadro 3"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-03.jpg" alt="Cuadro 3" /></button>
+        <button class="painting-item" data-idx="3" aria-label="Cuadro 4"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-04.jpg" alt="Cuadro 4" /></button>
+        <button class="painting-item" data-idx="4" aria-label="Cuadro 5"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-05.jpg" alt="Cuadro 5" /></button>
+        <button class="painting-item" data-idx="5" aria-label="Cuadro 6"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-06.jpg" alt="Cuadro 6" /></button>
+        <button class="painting-item" data-idx="6" aria-label="Cuadro 7"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-07.jpg" alt="Cuadro 7" /></button>
+        <button class="painting-item" data-idx="7" aria-label="Cuadro 8"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-08.jpg" alt="Cuadro 8" /></button>
+        <button class="painting-item" data-idx="8" aria-label="Cuadro 9"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-09.jpg" alt="Cuadro 9" /></button>
+        <button class="painting-item" data-idx="9" aria-label="Cuadro 10"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-10.jpg" alt="Cuadro 10" /></button>
+        <button class="painting-item" data-idx="10" aria-label="Cuadro 11"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-11.jpg" alt="Cuadro 11" /></button>
+        <button class="painting-item" data-idx="11" aria-label="Cuadro 12"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-12.jpg" alt="Cuadro 12" /></button>
+        <button class="painting-item" data-idx="12" aria-label="Cuadro 13"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-13.jpg" alt="Cuadro 13" /></button>
+        <button class="painting-item" data-idx="13" aria-label="Cuadro 14"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-14.jpg" alt="Cuadro 14" /></button>
+        <button class="painting-item" data-idx="14" aria-label="Cuadro 15"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-15.jpg" alt="Cuadro 15" /></button>
+        <button class="painting-item" data-idx="15" aria-label="Cuadro 16"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-16.jpg" alt="Cuadro 16" /></button>
+        <button class="painting-item" data-idx="16" aria-label="Cuadro 17"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-17.jpg" alt="Cuadro 17" /></button>
+        <button class="painting-item" data-idx="17" aria-label="Cuadro 18"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-18.jpg" alt="Cuadro 18" /></button>
+        <button class="painting-item" data-idx="18" aria-label="Cuadro 19"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-19.jpg" alt="Cuadro 19" /></button>
+        <button class="painting-item" data-idx="19" aria-label="Cuadro 20"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-20.jpg" alt="Cuadro 20" /></button>
+        <button class="painting-item" data-idx="20" aria-label="Cuadro 21"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-21.jpg" alt="Cuadro 21" /></button>
+        <button class="painting-item" data-idx="21" aria-label="Cuadro 22"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-22.jpg" alt="Cuadro 22" /></button>
+        <button class="painting-item" data-idx="22" aria-label="Cuadro 23"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-23.jpg" alt="Cuadro 23" /></button>
+        <button class="painting-item" data-idx="23" aria-label="Cuadro 24"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-24.jpg" alt="Cuadro 24" /></button>
+        <button class="painting-item" data-idx="24" aria-label="Cuadro 25"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-25.jpg" alt="Cuadro 25" /></button>
+        <button class="painting-item" data-idx="25" aria-label="Cuadro 26"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-26.jpg" alt="Cuadro 26" /></button>
+        <button class="painting-item" data-idx="26" aria-label="Cuadro 27"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-27.jpg" alt="Cuadro 27" /></button>
+        <button class="painting-item" data-idx="27" aria-label="Cuadro 28"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-28.jpg" alt="Cuadro 28" /></button>
+        <button class="painting-item" data-idx="28" aria-label="Cuadro 29"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-29.jpg" alt="Cuadro 29" /></button>
+        <button class="painting-item" data-idx="29" aria-label="Cuadro 30"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-30.jpg" alt="Cuadro 30" /></button>
+        <button class="painting-item" data-idx="30" aria-label="Cuadro 31"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-31.jpg" alt="Cuadro 31" /></button>
+        <button class="painting-item" data-idx="31" aria-label="Cuadro 32"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-32.jpg" alt="Cuadro 32" /></button>
+        <button class="painting-item" data-idx="32" aria-label="Cuadro 33"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-33.jpg" alt="Cuadro 33" /></button>
+        <button class="painting-item" data-idx="33" aria-label="Cuadro 34"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-34.jpg" alt="Cuadro 34" /></button>
+        <button class="painting-item" data-idx="34" aria-label="Cuadro 35"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-35.jpg" alt="Cuadro 35" /></button>
+        <button class="painting-item" data-idx="35" aria-label="Cuadro 36"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-36.jpg" alt="Cuadro 36" /></button>
+        <button class="painting-item" data-idx="36" aria-label="Cuadro 37"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-37.jpg" alt="Cuadro 37" /></button>
+        <button class="painting-item" data-idx="37" aria-label="Cuadro 38"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-38.jpg" alt="Cuadro 38" /></button>
+        <button class="painting-item" data-idx="38" aria-label="Cuadro 39"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-39.jpg" alt="Cuadro 39" /></button>
+        <button class="painting-item" data-idx="39" aria-label="Cuadro 40"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-40.jpg" alt="Cuadro 40" /></button>
+        <button class="painting-item" data-idx="40" aria-label="Cuadro 41"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-41.jpg" alt="Cuadro 41" /></button>
+        <button class="painting-item" data-idx="41" aria-label="Cuadro 42"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-42.jpg" alt="Cuadro 42" /></button>
+        <button class="painting-item" data-idx="42" aria-label="Cuadro 43"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-43.jpg" alt="Cuadro 43" /></button>
+        <button class="painting-item" data-idx="43" aria-label="Cuadro 44"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-44.jpg" alt="Cuadro 44" /></button>
+        <button class="painting-item" data-idx="44" aria-label="Cuadro 45"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-45.jpg" alt="Cuadro 45" /></button>
+        <button class="painting-item" data-idx="45" aria-label="Cuadro 46"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-46.jpg" alt="Cuadro 46" /></button>
+      </div>
+
+      <p class="mt-10 text-center text-xs ornament text-gold/70 reveal">
+        46 obras · pulsa cualquiera para ampliarla
+      </p>
     </div>
   </section>
 
@@ -1163,6 +1291,15 @@
   <!-- petal layer (for confetti on open) -->
   <div class="petal-layer" id="petal-layer" aria-hidden="true"></div>
 
+  <!-- lightbox for paintings -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Cuadro ampliado">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">✕</button>
+    <button class="lightbox-prev"  id="lightbox-prev"  aria-label="Anterior">‹</button>
+    <button class="lightbox-next"  id="lightbox-next"  aria-label="Siguiente">›</button>
+    <img alt="Cuadro" />
+    <span class="lightbox-counter" id="lightbox-counter">1 / 46</span>
+  </div>
+
   <!-- ============== JS ============== -->
   <script>
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1323,6 +1460,50 @@
       }, { threshold: 0.6 });
       startObs.observe(typeEl);
     }
+
+    // ---------- LIGHTBOX (cuadros)
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const paintingButtons = document.querySelectorAll('.painting-item');
+    const paintings = Array.from(paintingButtons).map(b => b.querySelector('img').src);
+    let currentPaintingIdx = 0;
+
+    function updateLightbox() {
+      lightboxImg.src = paintings[currentPaintingIdx];
+      lightboxCounter.textContent = `${currentPaintingIdx + 1} / ${paintings.length}`;
+    }
+    function openLightbox(idx) {
+      currentPaintingIdx = idx;
+      updateLightbox();
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    function nextPainting() { currentPaintingIdx = (currentPaintingIdx + 1) % paintings.length; updateLightbox(); }
+    function prevPainting() { currentPaintingIdx = (currentPaintingIdx - 1 + paintings.length) % paintings.length; updateLightbox(); }
+
+    paintingButtons.forEach((btn, i) => btn.addEventListener('click', () => openLightbox(i)));
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', prevPainting);
+    document.getElementById('lightbox-next').addEventListener('click', nextPainting);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextPainting();
+      if (e.key === 'ArrowLeft') prevPainting();
+    });
+    // swipe support (mobile)
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) (dx < 0 ? nextPainting : prevPainting)();
+    }, { passive: true });
   </script>
 
 </body>
