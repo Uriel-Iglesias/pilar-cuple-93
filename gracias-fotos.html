@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f1e6" />
+  <meta name="robots" content="noindex" />
+  <title>Gracias, Pilar · Fotos recibidas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #f7f1e6;
+      background-image:
+        radial-gradient(at 12% 8%, rgba(201,140,140,.12) 0, transparent 50%),
+        radial-gradient(at 88% 92%, rgba(154,171,142,.12) 0, transparent 50%);
+      color: #3a2f25;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .seal {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #b9cea2, #8aa478 55%, #5e7551);
+      box-shadow: 0 12px 30px -8px rgba(58,47,37,.5), inset 0 0 0 3px rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      color: #fdfbf6;
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 2.4rem;
+      animation: pop .6s cubic-bezier(.2,.7,.3,1.2);
+    }
+    @keyframes pop {
+      from { transform: scale(.4); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .ornament { letter-spacing: .3em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <main class="max-w-xl mx-auto text-center">
+    <div class="flex justify-center mb-8">
+      <div class="seal">✓</div>
+    </div>
+
+    <p class="ornament text-xs text-[#b7884a] mb-4">Fotos recibidas</p>
+    <h1 class="font-serif text-5xl text-[#3a2f25] leading-tight">
+      Gracias, Pilar.<br/>
+      <span class="italic text-[#b7884a]">Ya las tengo.</span>
+    </h1>
+
+    <p class="mt-8 font-serif text-xl text-[#6b5440] leading-relaxed italic">
+      Las fotos le acaban de llegar a Uriel. Las irá colocando con calma en la página de los nietos.
+    </p>
+
+    <p class="mt-6 font-serif text-lg text-[#3a2f25] leading-relaxed">
+      Si quieres mandar más otro día, vuelves a entrar y subes las que tengas.
+      <span style="font-family:'Dancing Script', cursive; font-size: 1.5rem; color: #b7884a;"> Que tengas un día bonito.</span>
+    </p>
+
+    <p class="mt-12">
+      <a href="/fotos.html" class="inline-block px-6 py-3 rounded-full border-2 border-[#3a2f25]/20 text-[#3a2f25] hover:bg-[#3a2f25]/5 transition">
+        Subir más fotos
+      </a>
+    </p>
+
+    <div class="mt-12 inline-flex items-center gap-3 text-xs ornament text-[#b7884a]">
+      <span style="display:inline-block; width:40px; height:1px; background: rgba(183,136,74,.5);"></span>
+      Tus fotos · 2026
+      <span style="display:inline-block; width:40px; height:1px; background: rgba(183,136,74,.5);"></span>
+    </div>
+  </main>
+</body>
+</html>

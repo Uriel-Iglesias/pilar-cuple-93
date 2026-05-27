@@ -4,8 +4,19 @@ node_modules/
 .vscode/
 .idea/
 
-# screenshots for local QA
+# screenshots locales de QA
 screenshot-*.png
 
-# legacy next.js sandbox (not part of this project)
+# datos sensibles (respuestas del formulario, fotos originales, configs locales)
+.netlify/
+.pilar-respuestas.json
+asets/
+fotonueba*.jpeg
+*.bak
+
+# proyecto Next.js antiguo, no forma parte
 lumen/
+
+# notas personales
+SKILL copia.md
+entrevista.md
