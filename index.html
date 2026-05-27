@@ -607,11 +607,6 @@
             Abrid el cofre
             <span aria-hidden="true">↓</span>
           </a>
-          <button id="play-greeting" class="inline-flex items-center gap-2 text-sm text-ink hover:text-gold transition border border-mocha/20 rounded-full px-5 py-3">
-            <span class="w-2.5 h-2.5 rounded-full bg-wax animate-shimmer"></span>
-            Escuchad mi saludo
-            <span class="text-xs text-mocha/70">(próximamente)</span>
-          </button>
         </div>
 
         <div class="hidden md:flex mt-16 items-center gap-4 text-mocha/70">
@@ -1283,11 +1278,6 @@
     // ---------- tap-to-flip on touch
     document.querySelectorAll('.flip').forEach(el => {
       el.addEventListener('click', () => el.classList.toggle('is-flipped'));
-    });
-
-    // ---------- placeholder greeting button
-    document.getElementById('play-greeting').addEventListener('click', () => {
-      alert('Aquí sonará el saludo grabado por Pilar (pendiente de grabar).');
     });
 
     // ---------- subtle parallax in hero (desktop only)
