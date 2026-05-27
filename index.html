@@ -558,6 +558,46 @@
 
       /* respect reduced motion */
     }
+    /* === DESPLEGABLE DE CUADROS === */
+    .cuadros-details { max-width: 480px; margin: 0 auto; }
+    .cuadros-details[open] { max-width: none; }
+    .cuadros-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+      background: #fdfbf6;
+      border: 2px solid rgba(183,136,74,.3);
+      border-radius: 9999px;
+      padding: 1rem 1.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: #3a2f25;
+      text-align: center;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease, color .2s ease;
+      -webkit-tap-highlight-color: rgba(183,136,74,.2);
+    }
+    .cuadros-summary:hover {
+      background: rgba(183,136,74,.08);
+      border-color: rgba(183,136,74,.55);
+      transform: translateY(-1px);
+    }
+    .cuadros-summary::-webkit-details-marker { display: none; }
+    .cuadros-summary-chev {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #b7884a; color: #fdfbf6;
+      font-size: 1.2rem; line-height: 1;
+      transition: transform .35s ease, background .2s ease, color .2s ease;
+    }
+    .cuadros-details[open] .cuadros-summary-chev { transform: rotate(45deg); }
+    .cuadros-details[open] > .cuadros-summary {
+      background: #b7884a; color: #fdfbf6; border-color: #b7884a;
+      max-width: 320px; margin: 0 auto;
+    }
+    .cuadros-details[open] > .cuadros-summary .cuadros-summary-chev {
+      background: #fdfbf6; color: #b7884a;
+    }
+
     /* === GALERÍA DE CUADROS === */
     .painting-grid {
       display: grid;
@@ -649,9 +689,9 @@
         <li><a class="hover:text-ink transition" href="#vida">Mi vida</a></li>
         <li><a class="hover:text-ink transition" href="#lecciones">Lo que aprendí</a></li>
         <li><a class="hover:text-ink transition" href="#recetas">Mi receta</a></li>
-        <li><a class="hover:text-ink transition" href="#cuadros">Mis cuadros</a></li>
         <li><a class="hover:text-ink transition" href="#sobres">Para cada uno</a></li>
         <li><a class="hover:text-ink transition" href="#album">Mi álbum</a></li>
+        <li><a class="hover:text-ink transition" href="#cuadros">Mis cuadros</a></li>
       </ul>
       <a href="#sobres" class="hidden md:inline-flex items-center gap-2 text-xs ornament text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition">
         Tu sobre
@@ -1026,70 +1066,6 @@
   </section>
 
 
-  <!-- =========== CUADROS / PINTURAS =========== -->
-  <section id="cuadros" class="relative py-20 md:py-28">
-    <div class="max-w-6xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-10 md:mb-14 reveal">
-        <p class="ornament text-xs text-gold mb-4">Capítulo VI</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-ink">Mis cuadros</h2>
-        <p class="mt-4 text-mocha max-w-xl mx-auto italic">Lo que pinto cuando no os tengo cerca.</p>
-      </div>
-
-      <div class="painting-grid reveal">
-        <button class="painting-item" data-idx="0" aria-label="Cuadro 1"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-01.jpg" alt="Cuadro 1" /></button>
-        <button class="painting-item" data-idx="1" aria-label="Cuadro 2"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-02.jpg" alt="Cuadro 2" /></button>
-        <button class="painting-item" data-idx="2" aria-label="Cuadro 3"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-03.jpg" alt="Cuadro 3" /></button>
-        <button class="painting-item" data-idx="3" aria-label="Cuadro 4"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-04.jpg" alt="Cuadro 4" /></button>
-        <button class="painting-item" data-idx="4" aria-label="Cuadro 5"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-05.jpg" alt="Cuadro 5" /></button>
-        <button class="painting-item" data-idx="5" aria-label="Cuadro 6"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-06.jpg" alt="Cuadro 6" /></button>
-        <button class="painting-item" data-idx="6" aria-label="Cuadro 7"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-07.jpg" alt="Cuadro 7" /></button>
-        <button class="painting-item" data-idx="7" aria-label="Cuadro 8"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-08.jpg" alt="Cuadro 8" /></button>
-        <button class="painting-item" data-idx="8" aria-label="Cuadro 9"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-09.jpg" alt="Cuadro 9" /></button>
-        <button class="painting-item" data-idx="9" aria-label="Cuadro 10"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-10.jpg" alt="Cuadro 10" /></button>
-        <button class="painting-item" data-idx="10" aria-label="Cuadro 11"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-11.jpg" alt="Cuadro 11" /></button>
-        <button class="painting-item" data-idx="11" aria-label="Cuadro 12"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-12.jpg" alt="Cuadro 12" /></button>
-        <button class="painting-item" data-idx="12" aria-label="Cuadro 13"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-13.jpg" alt="Cuadro 13" /></button>
-        <button class="painting-item" data-idx="13" aria-label="Cuadro 14"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-14.jpg" alt="Cuadro 14" /></button>
-        <button class="painting-item" data-idx="14" aria-label="Cuadro 15"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-15.jpg" alt="Cuadro 15" /></button>
-        <button class="painting-item" data-idx="15" aria-label="Cuadro 16"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-16.jpg" alt="Cuadro 16" /></button>
-        <button class="painting-item" data-idx="16" aria-label="Cuadro 17"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-17.jpg" alt="Cuadro 17" /></button>
-        <button class="painting-item" data-idx="17" aria-label="Cuadro 18"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-18.jpg" alt="Cuadro 18" /></button>
-        <button class="painting-item" data-idx="18" aria-label="Cuadro 19"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-19.jpg" alt="Cuadro 19" /></button>
-        <button class="painting-item" data-idx="19" aria-label="Cuadro 20"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-20.jpg" alt="Cuadro 20" /></button>
-        <button class="painting-item" data-idx="20" aria-label="Cuadro 21"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-21.jpg" alt="Cuadro 21" /></button>
-        <button class="painting-item" data-idx="21" aria-label="Cuadro 22"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-22.jpg" alt="Cuadro 22" /></button>
-        <button class="painting-item" data-idx="22" aria-label="Cuadro 23"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-23.jpg" alt="Cuadro 23" /></button>
-        <button class="painting-item" data-idx="23" aria-label="Cuadro 24"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-24.jpg" alt="Cuadro 24" /></button>
-        <button class="painting-item" data-idx="24" aria-label="Cuadro 25"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-25.jpg" alt="Cuadro 25" /></button>
-        <button class="painting-item" data-idx="25" aria-label="Cuadro 26"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-26.jpg" alt="Cuadro 26" /></button>
-        <button class="painting-item" data-idx="26" aria-label="Cuadro 27"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-27.jpg" alt="Cuadro 27" /></button>
-        <button class="painting-item" data-idx="27" aria-label="Cuadro 28"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-28.jpg" alt="Cuadro 28" /></button>
-        <button class="painting-item" data-idx="28" aria-label="Cuadro 29"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-29.jpg" alt="Cuadro 29" /></button>
-        <button class="painting-item" data-idx="29" aria-label="Cuadro 30"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-30.jpg" alt="Cuadro 30" /></button>
-        <button class="painting-item" data-idx="30" aria-label="Cuadro 31"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-31.jpg" alt="Cuadro 31" /></button>
-        <button class="painting-item" data-idx="31" aria-label="Cuadro 32"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-32.jpg" alt="Cuadro 32" /></button>
-        <button class="painting-item" data-idx="32" aria-label="Cuadro 33"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-33.jpg" alt="Cuadro 33" /></button>
-        <button class="painting-item" data-idx="33" aria-label="Cuadro 34"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-34.jpg" alt="Cuadro 34" /></button>
-        <button class="painting-item" data-idx="34" aria-label="Cuadro 35"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-35.jpg" alt="Cuadro 35" /></button>
-        <button class="painting-item" data-idx="35" aria-label="Cuadro 36"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-36.jpg" alt="Cuadro 36" /></button>
-        <button class="painting-item" data-idx="36" aria-label="Cuadro 37"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-37.jpg" alt="Cuadro 37" /></button>
-        <button class="painting-item" data-idx="37" aria-label="Cuadro 38"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-38.jpg" alt="Cuadro 38" /></button>
-        <button class="painting-item" data-idx="38" aria-label="Cuadro 39"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-39.jpg" alt="Cuadro 39" /></button>
-        <button class="painting-item" data-idx="39" aria-label="Cuadro 40"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-40.jpg" alt="Cuadro 40" /></button>
-        <button class="painting-item" data-idx="40" aria-label="Cuadro 41"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-41.jpg" alt="Cuadro 41" /></button>
-        <button class="painting-item" data-idx="41" aria-label="Cuadro 42"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-42.jpg" alt="Cuadro 42" /></button>
-        <button class="painting-item" data-idx="42" aria-label="Cuadro 43"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-43.jpg" alt="Cuadro 43" /></button>
-        <button class="painting-item" data-idx="43" aria-label="Cuadro 44"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-44.jpg" alt="Cuadro 44" /></button>
-        <button class="painting-item" data-idx="44" aria-label="Cuadro 45"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-45.jpg" alt="Cuadro 45" /></button>
-        <button class="painting-item" data-idx="45" aria-label="Cuadro 46"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-46.jpg" alt="Cuadro 46" /></button>
-      </div>
-
-      <p class="mt-10 text-center text-xs ornament text-gold/70 reveal">
-        46 obras · pulsa cualquiera para ampliarla
-      </p>
-    </div>
-  </section>
-
   <!-- =========== SOBRES INDIVIDUALES =========== -->
   <section id="sobres" class="relative py-20 md:py-28 overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 md:px-6">
@@ -1213,13 +1189,83 @@
     </div>
   </section>
 
+  <!-- =========== CUADROS / PINTURAS =========== -->
+  <section id="cuadros" class="relative py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-10 md:mb-14 reveal">
+        <p class="ornament text-xs text-gold mb-4">Capítulo VI</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-ink">Mis cuadros</h2>
+        <p class="mt-4 text-mocha max-w-xl mx-auto italic">Lo que pinto cuando no os tengo cerca.</p>
+      </div>
+
+      <details class="cuadros-details reveal">
+        <summary class="cuadros-summary">
+          <span class="cuadros-summary-text">Ver las 46 obras</span>
+          <span class="cuadros-summary-chev">+</span>
+        </summary>
+        <div class="painting-grid mt-8">
+        <button class="painting-item" data-idx="0" aria-label="Cuadro 1"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-01.jpg" alt="Cuadro 1" /></button>
+        <button class="painting-item" data-idx="1" aria-label="Cuadro 2"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-02.jpg" alt="Cuadro 2" /></button>
+        <button class="painting-item" data-idx="2" aria-label="Cuadro 3"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-03.jpg" alt="Cuadro 3" /></button>
+        <button class="painting-item" data-idx="3" aria-label="Cuadro 4"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-04.jpg" alt="Cuadro 4" /></button>
+        <button class="painting-item" data-idx="4" aria-label="Cuadro 5"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-05.jpg" alt="Cuadro 5" /></button>
+        <button class="painting-item" data-idx="5" aria-label="Cuadro 6"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-06.jpg" alt="Cuadro 6" /></button>
+        <button class="painting-item" data-idx="6" aria-label="Cuadro 7"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-07.jpg" alt="Cuadro 7" /></button>
+        <button class="painting-item" data-idx="7" aria-label="Cuadro 8"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-08.jpg" alt="Cuadro 8" /></button>
+        <button class="painting-item" data-idx="8" aria-label="Cuadro 9"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-09.jpg" alt="Cuadro 9" /></button>
+        <button class="painting-item" data-idx="9" aria-label="Cuadro 10"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-10.jpg" alt="Cuadro 10" /></button>
+        <button class="painting-item" data-idx="10" aria-label="Cuadro 11"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-11.jpg" alt="Cuadro 11" /></button>
+        <button class="painting-item" data-idx="11" aria-label="Cuadro 12"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-12.jpg" alt="Cuadro 12" /></button>
+        <button class="painting-item" data-idx="12" aria-label="Cuadro 13"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-13.jpg" alt="Cuadro 13" /></button>
+        <button class="painting-item" data-idx="13" aria-label="Cuadro 14"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-14.jpg" alt="Cuadro 14" /></button>
+        <button class="painting-item" data-idx="14" aria-label="Cuadro 15"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-15.jpg" alt="Cuadro 15" /></button>
+        <button class="painting-item" data-idx="15" aria-label="Cuadro 16"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-16.jpg" alt="Cuadro 16" /></button>
+        <button class="painting-item" data-idx="16" aria-label="Cuadro 17"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-17.jpg" alt="Cuadro 17" /></button>
+        <button class="painting-item" data-idx="17" aria-label="Cuadro 18"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-18.jpg" alt="Cuadro 18" /></button>
+        <button class="painting-item" data-idx="18" aria-label="Cuadro 19"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-19.jpg" alt="Cuadro 19" /></button>
+        <button class="painting-item" data-idx="19" aria-label="Cuadro 20"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-20.jpg" alt="Cuadro 20" /></button>
+        <button class="painting-item" data-idx="20" aria-label="Cuadro 21"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-21.jpg" alt="Cuadro 21" /></button>
+        <button class="painting-item" data-idx="21" aria-label="Cuadro 22"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-22.jpg" alt="Cuadro 22" /></button>
+        <button class="painting-item" data-idx="22" aria-label="Cuadro 23"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-23.jpg" alt="Cuadro 23" /></button>
+        <button class="painting-item" data-idx="23" aria-label="Cuadro 24"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-24.jpg" alt="Cuadro 24" /></button>
+        <button class="painting-item" data-idx="24" aria-label="Cuadro 25"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-25.jpg" alt="Cuadro 25" /></button>
+        <button class="painting-item" data-idx="25" aria-label="Cuadro 26"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-26.jpg" alt="Cuadro 26" /></button>
+        <button class="painting-item" data-idx="26" aria-label="Cuadro 27"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-27.jpg" alt="Cuadro 27" /></button>
+        <button class="painting-item" data-idx="27" aria-label="Cuadro 28"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-28.jpg" alt="Cuadro 28" /></button>
+        <button class="painting-item" data-idx="28" aria-label="Cuadro 29"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-29.jpg" alt="Cuadro 29" /></button>
+        <button class="painting-item" data-idx="29" aria-label="Cuadro 30"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-30.jpg" alt="Cuadro 30" /></button>
+        <button class="painting-item" data-idx="30" aria-label="Cuadro 31"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-31.jpg" alt="Cuadro 31" /></button>
+        <button class="painting-item" data-idx="31" aria-label="Cuadro 32"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-32.jpg" alt="Cuadro 32" /></button>
+        <button class="painting-item" data-idx="32" aria-label="Cuadro 33"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-33.jpg" alt="Cuadro 33" /></button>
+        <button class="painting-item" data-idx="33" aria-label="Cuadro 34"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-34.jpg" alt="Cuadro 34" /></button>
+        <button class="painting-item" data-idx="34" aria-label="Cuadro 35"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-35.jpg" alt="Cuadro 35" /></button>
+        <button class="painting-item" data-idx="35" aria-label="Cuadro 36"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-36.jpg" alt="Cuadro 36" /></button>
+        <button class="painting-item" data-idx="36" aria-label="Cuadro 37"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-37.jpg" alt="Cuadro 37" /></button>
+        <button class="painting-item" data-idx="37" aria-label="Cuadro 38"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-38.jpg" alt="Cuadro 38" /></button>
+        <button class="painting-item" data-idx="38" aria-label="Cuadro 39"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-39.jpg" alt="Cuadro 39" /></button>
+        <button class="painting-item" data-idx="39" aria-label="Cuadro 40"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-40.jpg" alt="Cuadro 40" /></button>
+        <button class="painting-item" data-idx="40" aria-label="Cuadro 41"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-41.jpg" alt="Cuadro 41" /></button>
+        <button class="painting-item" data-idx="41" aria-label="Cuadro 42"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-42.jpg" alt="Cuadro 42" /></button>
+        <button class="painting-item" data-idx="42" aria-label="Cuadro 43"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-43.jpg" alt="Cuadro 43" /></button>
+        <button class="painting-item" data-idx="43" aria-label="Cuadro 44"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-44.jpg" alt="Cuadro 44" /></button>
+        <button class="painting-item" data-idx="44" aria-label="Cuadro 45"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-45.jpg" alt="Cuadro 45" /></button>
+        <button class="painting-item" data-idx="45" aria-label="Cuadro 46"><img loading="lazy" decoding="async" src="img/cuadros/cuadro-46.jpg" alt="Cuadro 46" /></button>
+      </div>
+        <p class="mt-8 text-center text-xs ornament text-gold/70">
+          46 obras · pulsa cualquiera para ampliarla
+        </p>
+      </details>
+    </div>
+  </section>
+
+
   <!-- =========== REFRANES + CANCIONES (split) =========== -->
   <section class="relative py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
 
       <!-- Refranes -->
       <div class="reveal">
-        <p class="ornament text-xs text-gold mb-4">Capítulo VI</p>
+        <p class="ornament text-xs text-gold mb-4">Capítulo VII</p>
         <h2 class="font-serif text-4xl text-ink leading-tight">Mi frase</h2>
         <p class="mt-3 text-mocha italic">No soy refranera. Soy más bien…</p>
 
@@ -1238,7 +1284,7 @@
 
       <!-- Canciones -->
       <div class="reveal">
-        <p class="ornament text-xs text-gold mb-4">Capítulo VII</p>
+        <p class="ornament text-xs text-gold mb-4">Capítulo VIII</p>
         <h2 class="font-serif text-4xl text-ink leading-tight">Mi canción</h2>
         <p class="mt-3 text-mocha italic">La que se cuela en cualquier sobremesa.</p>
 
@@ -1247,11 +1293,11 @@
           <p class="font-serif text-4xl md:text-5xl italic text-ink leading-tight">Only You</p>
           <p class="mt-3 font-note text-2xl text-mocha">The Platters</p>
 
-          <a href="https://open.spotify.com/search/Only%20You%20The%20Platters"
+          <a href="https://www.youtube.com/results?search_query=The+Platters+Only+You"
              target="_blank" rel="noopener"
              class="mt-8 inline-flex items-center gap-2 text-sm text-gold border border-gold/40 rounded-full px-4 py-2 hover:bg-gold/10 transition">
             <span class="w-2 h-2 rounded-full bg-gold"></span>
-            Escuchadla
+            Escuchadla en YouTube ↗
           </a>
         </div>
       </div>
